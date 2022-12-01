@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web: 
+    build: flask   
+    ports:
+      - '5000:5000' 
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
+    volumes:
+      - ./flask:/app
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:      
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
+
+    
